@@ -16,7 +16,7 @@ class UtilisateurController extends DefaultController
         $this->jsonResponse($this->model->findAll());
     }
 
-    public function info($id)
+    public function single($id)
     {
         $this->jsonResponse($this->model->find($id));
     }
@@ -68,6 +68,7 @@ class UtilisateurController extends DefaultController
     }
 
     public function model(){
+        
         $this->jsonResponse($this->model->model());
     }
 

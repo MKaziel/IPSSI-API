@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\DefaultController;
@@ -11,51 +12,47 @@ class ProduitController extends DefaultController
         $this->model = new ProduitModel;
     }
 
-    public function list ()
+    public function list()
     {
         $this->jsonResponse($this->model->findAll());
     }
 
-    public function info($id)
+    public function single($id)
     {
         $this->jsonResponse($this->model->find($id));
     }
 
-    public function create ($data) 
+    public function create($data)
     {
         $save = $this->model->create($data);
-        if ($save === true){
+        if ($save === true) {
             $this->saveJsonResponse("Produit bien enregistré");
         } else {
             $this->BadRequestJsonResponse($save);
         }
     }
 
-    public function update ($data) 
+    public function update($data)
     {
-        if($this->model->find($data['id'])){
-            
-            $save=$this->model->update($data);
-               if ($save === true) {
-                   $this->saveJsonResponse("Le produit a été modifié ");
-             } else {
-                   $this->BadRequestJsonResponse($save);
+        if ($this->model->find($data['id'])) {
+
+            $save = $this->model->update($data);
+            if ($save === true) {
+                $this->saveJsonResponse("Le produit a été modifié ");
+            } else {
+                $this->BadRequestJsonResponse($save);
+            }
+        } else {
+            $this->jsonResponse(array(
+                "message" => "Produit non trouvé",
+                "connecter" => false
+            ));
         }
     }
-        else{
-             $this->jsonResponse(array(
-                    "message" => "Produit non trouvé",
-                    "connecter" => false
-                ));
-            
 
-        }
-
-    }
-
-    public function delete (string $id)
+    public function delete(string $id)
     {
-        $save =$this->model->delete($id);
+        $save = $this->model->delete($id);
         if ($save === true) {
             $this->saveJsonResponse("Le produit a été supprimé ");
         } else {
@@ -63,7 +60,8 @@ class ProduitController extends DefaultController
         }
     }
 
-    public function model(){
+    public function model()
+    {
         $this->jsonResponse($this->model->model());
     }
 }

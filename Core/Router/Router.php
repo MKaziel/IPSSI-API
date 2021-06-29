@@ -19,7 +19,8 @@ else {
             switch ($htmlVerb) {
                 case 'GET':
                     if(isset($uri[3]) && preg_match("[\d]", $uri[3])) {
-                        $cont->$uri[2]($uri[3]);
+                        $method = $uri[2];
+                        $cont->$method($uri[3]);
                     }
                     else {
                         $cont->BadRequestJsonResponse("No data provided in the request");
@@ -29,7 +30,8 @@ else {
                 case 'POST':
                     if(isset($uri[3])){
                         if(isset($_POST) && !empty($_POST)) {
-                            $cont->$uri[2]($uri[3], $_POST);
+                            $method = $uri[2];
+                            $cont->$method($uri[3], $_POST);
                         }
                         else {
                             $cont->BadRequestJsonResponse("No data provided in the request");
