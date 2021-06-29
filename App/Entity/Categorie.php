@@ -5,7 +5,7 @@ class Categorie {
 
     public $id;
     
-    public $name;
+    public $nom;
 
     /**
      * Get the value of id
@@ -18,17 +18,17 @@ class Categorie {
     /**
      * Get the value of article
      */
-    public function getName()
+    public function getNom()
     {
-        return $this->name;
+        return $this->nom;
     }
 
     /**
-     * Set the value of article
+     * Set the value of categorie
      */
-    public function setName($name): self
+    public function setNom($nom): self
     {
-        $this->title = $name;
+        $this->nom = $nom;
 
         return $this;
     }

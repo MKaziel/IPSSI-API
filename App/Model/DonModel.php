@@ -1,36 +1,36 @@
 <?php
 namespace App\Model;
 
-use App\Entity\Categorie;
+use App\Entity\Don;
 use Core\Database;
 
-class CategorieModel {
+class DonModel {
 
-    private $className = "App\Entity\Categorie";
+    private $className = "App\Entity\Don";
 
     public function __construct()
     {
         $this->db = new Database;
     }
 
-    /**
-     * 
-     */
     public function model(){
         $model = array(
-            "nom"=> "vide"
+            "montant" => "montant",
+            "data" => "data",
+            "id_utilisateur" => "montant",
+            "anonyme" => "quantite"
         );
         return $model;
     }
 
     /**
-     * return list of Categories
+     * return list of Dons
      *
-     * @return Categorie[]
+     * @return Don[]
      */
     public function findAll() :array
     {
-        $statement = "SELECT * FROM categorie";
+        $statement = "SELECT * FROM don";
         return $this->db->query($statement, $this->className);
     }
 
@@ -38,25 +38,28 @@ class CategorieModel {
      * Return a Cateogie
      *
      * @param int $id
-     * @return Categorie
+     * @return Don
      */
-    public function find(int $id) :Categorie
+    public function find(int $id) :Don
     {
-        $statement = "SELECT * FROM categorie WHERE id = $id";
+        $statement = "SELECT * FROM don WHERE id = $id";
         return $this->db->query($statement, $this->className, true);
     }
 
     public function create(array $data)
     {
-        $statement = "INSERT INTO categorie (nom) 
-            VALUES (:nom)";
+        $statement = "INSERT INTO don (montant,data,id_utilisateur,anonyme) 
+            VALUES (:montant,:data,:id_utilisateur,:anonyme)";
         return $this->db->prepare($statement, $data);
     }
 
     public function update(array $data)
     {
-        $statement = "UPDATE categorie SET
-                        nom = :nom
+        $statement = "UPDATE don SET
+                        montant = :montant,
+                        data = :data,
+                        id_utilisateur = :id_utilisateur,
+                        anonyme = :anonyme
                         ";
         
         return $this->db->prepare($statement, $data);
@@ -64,7 +67,7 @@ class CategorieModel {
 
     public function delete(int $id)
     {
-        $statement = "DELETE FROM categorie WHERE id = $id";
+        $statement = "DELETE FROM don WHERE id = $id";
 
         return $this->db->prepare($statement, array());
     }

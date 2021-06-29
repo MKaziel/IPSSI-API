@@ -5,15 +5,15 @@ class Article {
 
     public $id;
     
-    public $title;
+    public $titre;
     
-    public $content;
+    public $contenue;
 
     public $categorie_id;
 
     public $user_id;
 
-    public $picture;
+    public $illustration;
 
     /**
      * Get the value of id
@@ -26,35 +26,35 @@ class Article {
     /**
      * Get the value of article
      */
-    public function getTitle()
+    public function getTitre()
     {
-        return $this->title;
+        return $this->titre;
     }
 
     /**
      * Set the value of article
      */
-    public function setTitle($title): self
+    public function setTitre($titre): self
     {
-        $this->title = $title;
+        $this->titre = $titre;
 
         return $this;
     }
 
     /**
-     * Get the value of content
+     * Get the value of contenue
      */
-    public function getContent()
+    public function getContenue()
     {
-        return $this->content;
+        return $this->contenue;
     }
 
     /**
-     * Set the value of content
+     * Set the value of contenue
      */
-    public function setContent($content): self
+    public function setContenue($contenue): self
     {
-        $this->content = $content;
+        $this->contenue = $contenue;
 
         return $this;
     }
@@ -96,19 +96,19 @@ class Article {
     }
 
     /**
-     * Get the value of picture
+     * Get the value of illustration
      */
-    public function getPicture()
+    public function getIllustration()
     {
-        return $this->picture;
+        return $this->illustration;
     }
 
     /**
-     * Set the value of picture
+     * Set the value of illustration
      */
-    public function setPicture($picture): self
+    public function setIllustration($illustration): self
     {
-        $this->picture = $picture;
+        $this->illustration = $illustration;
 
         return $this;
     }

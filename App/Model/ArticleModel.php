@@ -14,6 +14,22 @@ class ArticleModel {
     }
 
     /**
+     * 
+     */
+    public function model(){
+        $model = array(
+            "titre" => "titre",
+            "contenue" => "contenue",
+            "categorie_id" => "categorie_id",
+            "id_utilisateur" => "id_utilisateur",
+            "user_id" => "user_id",
+            "illustration" => "illustration"
+        );
+        return $model;
+    }
+
+
+    /**
      * return list of Articles
      *
      * @return Article[]
@@ -23,6 +39,8 @@ class ArticleModel {
         $statement = "SELECT * FROM article";
         return $this->db->query($statement, $this->className);
     }
+    
+
 
     /**
      * Return an Article
@@ -38,18 +56,22 @@ class ArticleModel {
 
     public function create(array $data)
     {
-        $statement = "INSERT INTO article (title, content, categorie_id, user_id) 
-            VALUES (:title, :content, :categorie_id, :user_id)";
+        $statement = "INSERT INTO article (titre,contenue,categorie_id,user_id) 
+            VALUES (:titre, :contenue, :categorie_id, :user_id)";
         return $this->db->prepare($statement, $data);
     }
 
     public function update(array $data)
     {
+        if(!isset($data['illusatration'])){
+            $data['illustration'] = null;
+        }
         $statement = "UPDATE article SET
-                        title = :title,
-                        content = :content,
+                        titre = :titre,
+                        contenue = :contenue,
                         categorie_id = :categorie_id,
-                        user_id = :user_id
+                        user_id = :user_id,
+                        illustration = :illustration
                         ";
         
         return $this->db->prepare($statement, $data);

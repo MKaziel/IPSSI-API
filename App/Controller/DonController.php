@@ -1,14 +1,14 @@
 <?php
 namespace App\Controller;
 
-use App\Model\CategorieModel;
 use App\Controller\DefaultController;
+use App\Model\DonModel;
 
-class CategorieController extends DefaultController{
-    
+class DonController extends DefaultController
+{
     public function __construct()
     {
-        $this->model = new CategorieModel;
+        $this->model = new DonModel;
     }
 
     public function list ()
