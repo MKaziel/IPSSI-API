@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\DefaultController;
@@ -11,7 +12,7 @@ class DonController extends DefaultController
         $this->model = new DonModel;
     }
 
-    public function list ()
+    public function list()
     {
         $this->jsonResponse($this->model->findAll());
     }
@@ -21,24 +22,47 @@ class DonController extends DefaultController
         $this->jsonResponse($this->model->find($id));
     }
 
-    public function create ($data) 
+    public function create($data)
     {
-        $this->jsonResponse($this->model->create($data));
-
+        $save = $this->model->create($data);
+        if ($save === true) {
+            $this->saveJsonResponse("Don bien enregistré");
+        } else {
+            $this->BadRequestJsonResponse($save);
+        }
     }
 
-    public function update ($data) 
+    public function update($data)
     {
-        $this->jsonResponse($this->model->update($data));
+        if ($this->model->find($data['id'])) {
 
+            $save = $this->model->update($data);
+            if ($save === true) {
+                $this->saveJsonResponse("Le don a été modifié ");
+            } else {
+                $this->BadRequestJsonResponse($save);
+            }
+        } else {
+            $this->jsonResponse(array(
+                "message" => "Don non trouvé",
+                "connecter" => false
+            ));
+        }
     }
 
-    public function delete (string $id)
+
+    public function delete(string $id)
     {
-        $this->jsonResponse($this->model->delete($id));
+        $save = $this->model->delete($id);
+        if ($save === true) {
+            $this->saveJsonResponse("Le don a été supprimé ");
+        } else {
+            $this->BadRequestJsonResponse($save);
+        }
     }
 
-    public function model(){
+    public function model()
+    {
         $this->jsonResponse($this->model->model());
     }
 }

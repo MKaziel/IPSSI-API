@@ -22,7 +22,7 @@ else {
                         $cont->$uri[2]($uri[3]);
                     }
                     else {
-                        $cont->badRequestJsonResponse("No data provided in the request");
+                        $cont->BadRequestJsonResponse("No data provided in the request");
                     }
                     break;
 
@@ -32,7 +32,7 @@ else {
                             $cont->$uri[2]($uri[3], $_POST);
                         }
                         else {
-                            $cont->badRequestJsonResponse("No data provided in the request");
+                            $cont->BadRequestJsonResponse("No data provided in the request");
                         }
                     } 
                     else {
@@ -40,7 +40,7 @@ else {
                             $cont->$uri[2]($_POST);
                         }
                         else {
-                            $cont->badRequestJsonResponse("No data provided in the request");
+                            $cont->BadRequestJsonResponse("No data provided in the request");
                         }
                     }
                     break;
@@ -55,10 +55,10 @@ else {
                             $cont->$uri[2]($uri[3], $_PUT);
                         }
                         else {
-                            $cont->badRequestJsonResponse("No data provided in the request");
+                            $cont->BadRequestJsonResponse("No data provided in the request");
                         }
                     } else {
-                        $cont->badRequestJsonResponse("No {id} found in the url's request");
+                        $cont->BadRequestJsonResponse("No {id} found in the url's request");
                     }
                     break;
 
@@ -67,22 +67,22 @@ else {
                         $cont->$uri[2]($uri[3]);
                     }
                     else {
-                        $cont->badRequestJsonResponse("No data provided in the request");
+                        $cont->BadRequestJsonResponse("No data provided in the request");
                     }
                     break;
                 
                 default:
-                    $cont->badRequestJsonResponse();
+                    $cont->BadRequestJsonResponse();
                     break;
             }
         } else {
-            $cont->badRequestJsonResponse();
+            $cont->BadRequestJsonResponse();
         }
     } 
     else if (!isset($uri[2])) {
         $cont->list();
     } 
     else {
-        $cont->badRequestJsonResponse();
+        $cont->BadRequestJsonResponse();
     }
 }
