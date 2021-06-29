@@ -3,6 +3,10 @@ namespace App\Controller;
 
 class DefaultController {
 
+    public function default() {
+        return $this->jsonResponse(array("message"=>"Bienvenue sur l'API de l'animalerie de l'IPSSI"));
+    }
+
     public function jsonResponse ($data, $message = "Récupération ok")
     {
         header("content-type: Application/json");
@@ -14,11 +18,6 @@ class DefaultController {
             "data" => $data
         ];
         echo json_encode($response);
-        // {
-        //     statusCode: 200,
-        //     message:"ok",
-        //     data: []
-        // }
     }
 
     public function saveJsonResponse($message = "Enregistrement ok")

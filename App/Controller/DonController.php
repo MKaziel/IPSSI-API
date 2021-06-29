@@ -17,6 +17,11 @@ class DonController extends DefaultController
         $this->jsonResponse($this->model->findAll());
     }
 
+    public function single($id)
+    {
+        $this->jsonResponse($this->model->find($id));
+    }
+
     public function info($id)
     {
         $this->jsonResponse($this->model->find($id));

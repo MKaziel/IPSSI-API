@@ -7,7 +7,8 @@ class Database {
     public function __construct()
     {
         $this->pdo = new \PDO("mysql:host=localhost:3306;dbname=ipssi_animalerie", "root", "", [
-            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
+            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+            \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
         ]);
     }
 

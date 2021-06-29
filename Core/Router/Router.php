@@ -39,7 +39,8 @@ else {
                     } 
                     else {
                         if(isset($_POST) && !empty($_POST)) {
-                            $cont->$uri[2]($_POST);
+                            $method = $uri[2];
+                            $cont->$method($_POST);
                         }
                         else {
                             $cont->BadRequestJsonResponse("No data provided in the request");
@@ -53,8 +54,8 @@ else {
                         $_PUT = array();
                         parse_str(file_get_contents("php://input"), $_PUT);
                         if(isset($_PUT) && !empty($_PUT)) {
-
-                            $cont->$uri[2]($uri[3], $_PUT);
+                            $method = $uri[2];
+                            $cont->$method($uri[3], $_PUT);
                         }
                         else {
                             $cont->BadRequestJsonResponse("No data provided in the request");
@@ -66,7 +67,8 @@ else {
 
                 case 'DELETE':
                     if(isset($uri[3]) && preg_match("[\d]", $uri[3])) {
-                        $cont->$uri[2]($uri[3]);
+                        $method = $uri[2];
+                        $cont->$method($uri[3]);
                     }
                     else {
                         $cont->BadRequestJsonResponse("No data provided in the request");

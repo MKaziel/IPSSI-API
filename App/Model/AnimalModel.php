@@ -22,6 +22,7 @@ class AnimalModel {
             "type" => "type",
             "race" => "race",
             "poids" => "poids",
+            "age" => 0,
             "description" => "description",
             "photo" => "photo",
             "proprietaire" => "proprietaire nullable"
