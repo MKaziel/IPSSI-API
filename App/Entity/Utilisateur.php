@@ -1,14 +1,20 @@
 <?php
+
 namespace App\Entity;
 
-class Utilisateur {
+class Utilisateur
+{
 
     public $id;
-    
+
     public $identifiant;
 
     public $motdepasse;
-    
+
+    public $email;
+
+    public $pseudo;
+
     public $role;
 
     /**
@@ -30,12 +36,12 @@ class Utilisateur {
     /**
      * Get the mot de passe
      */
-     public function getPassword()
-     {
-         return $this->motdepasse;
-     }
+    public function getPassword()
+    {
+        return $this->motdepasse;
+    }
 
-     /**
+    /**
      * Get the role of user
      */
     public function getRole()
@@ -57,13 +63,13 @@ class Utilisateur {
     /**
      * Set the value of categorie
      */
-     public function setPassword($motdepasse): self
-     {
-         $this->motdepasse = $motdepasse;
- 
-         return $this;
-     }
-     /**
+    public function setPassword($motdepasse): self
+    {
+        $this->motdepasse = $motdepasse;
+
+        return $this;
+    }
+    /**
      * Set the value of categorie
      */
     public function setRole($role): self
@@ -72,6 +78,42 @@ class Utilisateur {
 
         return $this;
     }
-    
 
+
+
+    /**
+     * Get the value of pseudo
+     */
+    public function getPseudo()
+    {
+        return $this->pseudo;
+    }
+
+    /**
+     * Set the value of pseudo
+     */
+    public function setPseudo($pseudo): self
+    {
+        $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of email
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set the value of email
+     */
+    public function setEmail($email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
 }

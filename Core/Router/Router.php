@@ -2,76 +2,108 @@
 
 //Configuration des variables nécessaire au routing de l'application
 $path = $_SERVER["REQUEST_URI"];
-define("SERVER", $_SERVER["HTTP_HOST"]."/");
+$pos=1;
 $uri = explode("/", $path);
-$entity = ucfirst($uri[1]) ? ucfirst($uri[1]) : "default";
-$controller = "App\Controller\\" . $entity . "Controller";
+if($uri[1] === "Ipssi-Api"){
+    $pos = 2;
+}
+define("SERVER", $_SERVER["HTTP_HOST"]."/");
+$entity = ucfirst($uri[$pos]) ? ucfirst($uri[$pos]) : "default";
+$controller = $entity==="Ipssi-Api"? "App\Controller\\DefaultController" :"App\Controller\\" . $entity . "Controller";
 $cont = new $controller();
 $htmlVerb = $_SERVER['REQUEST_METHOD'];
 
 //Détection du verbe et application de la route en conséquence
-if ($path === "/") {
+// if($rMethod === "OPTIONS") {
+//     $cont->optionResponse("ok");
+// }
+
+if ($path === "/" or $path ==="/Ipssi-Api/" or $htmlVerb === 'OPTIONS') {
+    $cont->optionResponse("ok");
     $cont->default();
 }
 else {
-    if(isset($uri[2])) {
-        if (method_exists($cont, $uri[2])) {
+    if(isset($uri[$pos+1])) {
+        echo($uri[$pos+1]);
+        if (method_exists($cont, $uri[$pos+1])) {
             switch ($htmlVerb) {
                 case 'GET':
-                    if(isset($uri[3]) && preg_match("[\d]", $uri[3])) {
-                        $method = $uri[2];
-                        $cont->$method($uri[3]);
+                    if (in_array("admin", $role) or in_array("user", $role)) {
+                        # code...
+                        if(isset($uri[$pos+2]) && preg_match("[\d]", $uri[$pos+2])) {
+                            $method = $uri[$pos+1];
+                            $cont->$method($uri[$pos+2]);
+                        }
+                        else {
+                            $method = $uri[$pos+1];
+                            $cont->$method();
+                        }
                     }
                     else {
-                        $cont->BadRequestJsonResponse("No data provided in the request");
+                        $cont->unauthorizedResponse("Authorisation manquante");
                     }
                     break;
 
                 case 'POST':
-                    if(isset($uri[3])){
-                        if(isset($_POST) && !empty($_POST)) {
-                            $method = $uri[2];
-                            $cont->$method($uri[3], $_POST);
-                        }
+                    if (in_array("admin", $role)) {
+                        if(isset($uri[$pos+2])){
+                            if(isset($_POST) && !empty($_POST)) {
+                                $method = $uri[$pos+1];
+                                $cont->$method($uri[$pos+2], $_POST);
+                            }
+                            else {
+                                $cont->BadRequestJsonResponse("No data provided in the request");
+                            }
+                        } 
                         else {
-                            $cont->BadRequestJsonResponse("No data provided in the request");
+                            if(isset($_POST) && !empty($_POST)) {
+                                $method = $uri[$pos+1];
+                                $cont->$method($_POST);
+                            }
+                            else {
+                                $cont->BadRequestJsonResponse("No data provided in the request");
+                            }
                         }
-                    } 
+                    }
                     else {
-                        if(isset($_POST) && !empty($_POST)) {
-                            $method = $uri[2];
-                            $cont->$method($_POST);
-                        }
-                        else {
-                            $cont->BadRequestJsonResponse("No data provided in the request");
-                        }
+                        $cont->unauthorizedResponse("Authorisation manquante");
                     }
                     break;
 
                 case 'PATCH':
                 case 'PUT':
-                    if(isset($uri[3]) && preg_match("[\d]", $uri[3])){
-                        $_PUT = array();
-                        parse_str(file_get_contents("php://input"), $_PUT);
-                        if(isset($_PUT) && !empty($_PUT)) {
-                            $method = $uri[2];
-                            $cont->$method($uri[3], $_PUT);
+                    if (in_array("admin", $role)) {
+                        if(isset($uri[$pos+2]) && preg_match("[\d]", $uri[$pos+2])){
+                            $_PUT = array();
+                            parse_str(file_get_contents("php://input"), $_PUT);
+                            if(isset($_PUT) && !empty($_PUT)) {
+                                $method = $uri[$pos+1];
+                                $cont->$method($uri[$pos+2], $_PUT);
+                            }
+                            else {
+                                $cont->BadRequestJsonResponse("No data provided in the request");
+                            }
+                        } else {
+                            $cont->BadRequestJsonResponse("No {id} found in the url's request");
                         }
-                        else {
-                            $cont->BadRequestJsonResponse("No data provided in the request");
-                        }
-                    } else {
-                        $cont->BadRequestJsonResponse("No {id} found in the url's request");
+                    }
+                    else {
+                        $cont->unauthorizedResponse("Authorisation manquante");
                     }
                     break;
 
                 case 'DELETE':
-                    if(isset($uri[3]) && preg_match("[\d]", $uri[3])) {
-                        $method = $uri[2];
-                        $cont->$method($uri[3]);
+                    if (in_array("admin", $role)) {
+                        if(isset($uri[$pos+2]) && preg_match("[\d]", $uri[$pos+2])) {
+                            $method = $uri[$pos+1];
+                            $cont->$method($uri[$pos+2]);
+                        }
+                        else {
+                            $cont->BadRequestJsonResponse("No data provided in the request");
+                        }
                     }
                     else {
-                        $cont->BadRequestJsonResponse("No data provided in the request");
+                        $cont->unauthorizedResponse("Authorisation manquante");
                     }
                     break;
                 
@@ -83,7 +115,7 @@ else {
             $cont->BadRequestJsonResponse();
         }
     } 
-    else if (!isset($uri[2])) {
+    else if (!isset($uri[$pos+1])) {
         $cont->list();
     } 
     else {
