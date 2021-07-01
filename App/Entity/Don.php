@@ -1,16 +1,54 @@
 <?php
 namespace App\Entity;
 
+/**
+ * @OA\Schema(title="Don")
+ */
 class Don {
 
+    /**
+    *   @OA\Property(
+    *   type="integer",
+    *   nullable=false,
+    *   )
+    *   @var int 
+    */
     public $id;
     
+    /**
+    *   @OA\Property(
+    *   type="float",
+    *   nullable=false,
+    *   )
+    *   @var float 
+    */
     public $montant;
 
+    /**
+    *   @OA\Property(
+    *   type="date",
+    *   nullable=false,
+    *   )
+    *   @var date 
+    */
     public $data;
     
+    /**
+    *   @OA\Property(
+    *   type="integer",
+    *   nullable=false,
+    *   )
+    *   @var int 
+    */
     public $id_utilisateur;
 
+    /**
+    *   @OA\Property(
+    *   type="bool",
+    *   nullable=false,
+    *   )
+    *   @var bool 
+    */
     public $anonyme;
 
     /**
@@ -22,7 +60,7 @@ class Don {
     }
 
     /**
-     * Get the value of don
+     * Get the value of montant
      */
     public function getMontant()
     {
@@ -30,7 +68,7 @@ class Don {
     }
 
     /**
-     * Get the value of don
+     * Get the date
      */
      public function getData()
      {
@@ -38,7 +76,7 @@ class Don {
      }
 
      /**
-     * Get the value of don
+     * Get the id of user
      */
     public function getId_user()
     {
@@ -46,14 +84,14 @@ class Don {
     }
     
     /**
-     * Get the value of don
+     * Get the value anonyme 
      */
      public function getAnonyme()
      {
          return $this->anonyme;
      }
     /**
-     * Set the value of don
+     * Set the value of montant
      */
     public function setMontant($montant): self
     {
@@ -63,7 +101,7 @@ class Don {
     }
 
     /**
-     * Set the value of don
+     * Set the date
      */
      public function setData($data): self
      {
@@ -73,7 +111,7 @@ class Don {
      }
 
      /**
-     * Set the value of don
+     * Set the id of user
      */
     public function setId_user($id_utilisateur): self
     {
@@ -83,7 +121,7 @@ class Don {
     }
 
     /**
-     * Set the value of don
+     * Set the value of anonyme
      */
      public function setAnonyme($anonyme): self
      {

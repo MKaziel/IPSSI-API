@@ -2,19 +2,64 @@
 
 namespace App\Entity;
 
+/**
+ * @OA\Schema(title="Utilisateur")
+ */
 class Utilisateur
 {
 
+    /**
+    *   @OA\Property(
+    *   type="integer",
+    *   nullable=false,
+    *   )
+    *   @var int 
+    */
     public $id;
 
+    /**
+    *   @OA\Property(
+    *   type="string",
+    *   nullable=false,
+    *   )
+    *   @var string 
+    */
     public $identifiant;
 
+    /**
+    *   @OA\Property(
+    *   type="string",
+    *   nullable=false,
+    *   )
+    *   @var string 
+    */
     public $motdepasse;
 
+    /**
+    *   @OA\Property(
+    *   type="string",
+    *   nullable=false,
+    *   )
+    *   @var string 
+    */
     public $email;
 
+    /**
+    *   @OA\Property(
+    *   type="string",
+    *   nullable=false,
+    *   )
+    *   @var string 
+    */
     public $pseudo;
 
+    /**
+    *   @OA\Property(
+    *   type="string",
+    *   nullable=false,
+    *   )
+    *   @var string 
+    */
     public $role;
 
     /**
@@ -61,7 +106,7 @@ class Utilisateur
     }
 
     /**
-     * Set the value of categorie
+     * Set the value of mot de passe
      */
     public function setPassword($motdepasse): self
     {
@@ -70,7 +115,7 @@ class Utilisateur
         return $this;
     }
     /**
-     * Set the value of categorie
+     * Set the value of role
      */
     public function setRole($role): self
     {
@@ -78,8 +123,6 @@ class Utilisateur
 
         return $this;
     }
-
-
 
     /**
      * Get the value of pseudo

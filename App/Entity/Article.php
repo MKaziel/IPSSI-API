@@ -1,18 +1,63 @@
 <?php
 namespace App\Entity;
 
+/**
+ * @OA\Schema(title="Article")
+ */
 class Article {
 
+    /**
+    *   @OA\Property(
+    *   type="integer",
+    *   nullable=false,
+    *   )
+    *   @var int 
+    */
     public $id;
     
+    /**
+    *   @OA\Property(
+    *   type="string",
+    *   nullable=false,
+    *   )
+    *   @var string 
+    */
     public $titre;
     
+    /**
+    *   @OA\Property(
+    *   type="string",
+    *   nullable=false,
+    *   )
+    *   @var string 
+    */
     public $contenue;
 
+    /**
+    *   @OA\Property(
+    *   type="integer",
+    *   nullable=false,
+    *   )
+    *   @var int 
+    */
     public $categorie_id;
 
+    /**
+    *   @OA\Property(
+    *   type="integer",
+    *   nullable=false,
+    *   )
+    *   @var int 
+    */
     public $user_id;
 
+    /**
+    *   @OA\Property(
+    *   type="integer",
+    *   nullable=true,
+    *   )
+    *   @var int 
+    */
     public $illustration;
 
     /**
@@ -24,7 +69,7 @@ class Article {
     }
 
     /**
-     * Get the value of article
+     * Get the value of title
      */
     public function getTitre()
     {
@@ -32,7 +77,7 @@ class Article {
     }
 
     /**
-     * Set the value of article
+     * Set the value of title
      */
     public function setTitre($titre): self
     {

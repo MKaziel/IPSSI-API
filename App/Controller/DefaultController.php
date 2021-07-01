@@ -1,13 +1,34 @@
 <?php
+
 namespace App\Controller;
 
-class DefaultController {
+class DefaultController
+{
 
-    public function default() {
-        return $this->jsonResponse(array("message"=>"Bienvenue sur l'API de l'animalerie de l'IPSSI"));
+    public function default()
+    {
+        return $this->optionResponse("Bienvenue sur l'API de l'animalerie de l'IPSSI");
     }
 
-    public function jsonResponse ($data, $message = "Récupération ok")
+    public function infoSwagger($dir,$exclude = [],$pattern="*.php")
+    {
+        header("content-type: Application/json");
+        header("cache-control: public, max-age=1000");
+        header("Access-Control-Allow-Origin: *");
+        header('HTTP/1.0 200');
+
+        $json = $this->jsonSwagger($dir,$exclude,$pattern);
+
+        echo $json;
+    }
+
+    function jsonSwagger($dir,$exclude = [],$pattern="*.php"){
+        $openapi = \OpenApi\Generator::scan(\OpenApi\Util::finder($dir, $exclude, $pattern));
+        file_put_contents($dir."/Swagger/documentation.json",$openapi->toJson());
+        return $openapi->toJson();
+    }
+
+    public function jsonResponse($data, $message = "Récupération ok")
     {
         header("content-type: Application/json");
         header("cache-control: public, max-age=1000");
@@ -24,7 +45,7 @@ class DefaultController {
     public function saveJsonResponse($message = "Enregistrement ok")
     {
         header("content-type: Application/json");
-        header("cache-control: public, max-age=1000");
+        header("cache-control: no-cache");
         header('HTTP/1.0 201');
         $response = [
             "statusCode" => 201,
@@ -36,7 +57,7 @@ class DefaultController {
     public function BadRequestJsonResponse($message = "Page not found")
     {
         header("content-type: Application/json");
-        header("cache-control: public, max-age=1000");
+        header("cache-control: no-cache");
         header('HTTP/1.0 404');
         $response = [
             "statusCode" => 404,
@@ -44,11 +65,11 @@ class DefaultController {
         ];
         echo json_encode($response);
     }
-    
+
     public function UnauthorizedJsonResponse($message = "Problème d'authentification à l'application")
     {
         header("content-type: Application/json");
-        header("cache-control: public, max-age=1000");
+        header("cache-control: no-cache");
         header('HTTP/1.0 401');
         $response = [
             "statusCode" => 401,
@@ -56,11 +77,11 @@ class DefaultController {
         ];
         echo json_encode($response);
     }
-    
+
     public function ForbiddenJsonResponse($message = "Vous n'avez pas l'authorisation d'accéder à cette page !!")
     {
         header("content-type: Application/json");
-        header("cache-control: public, max-age=1000");
+        header("cache-control: no-cache");
         header('HTTP/1.0 403');
         $response = [
             "statusCode" => 403,
@@ -72,7 +93,7 @@ class DefaultController {
     public function MethodNotAllowed($message = "Cette méthode de requête n'est pas autorisé !!")
     {
         header("content-type: Application/json");
-        header("cache-control: public, max-age=1000");
+        header("cache-control: no-cache");
         header('HTTP/1.0 405');
         $response = [
             "statusCode" => 405,
@@ -84,7 +105,7 @@ class DefaultController {
     public function InternalServeurError($message = "Problème Interne du serveur !!!")
     {
         header("content-type: Application/json");
-        header("cache-control: public, max-age=1000");
+        header("cache-control: no-cache");
         header("Access-Control-Allow-Origin: *");
         header('HTTP/1.0 500');
         $response = [
@@ -97,7 +118,7 @@ class DefaultController {
     public function ServiceUnavailable($message = "Service indisponible !!! ")
     {
         header("content-type: Application/json");
-        header("cache-control: public, max-age=1000");
+        header("cache-control: no-cache");
         header('HTTP/1.0 503');
         $response = [
             "statusCode" => 503,
@@ -106,10 +127,10 @@ class DefaultController {
         echo json_encode($response);
     }
 
-    public function optionResponse($message) 
+    public function optionResponse($message)
     {
         header("content-type: Application/json");
-        header("cache-control: public, max-age=1000");
+        header("cache-control: no-cache");
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: *");
         header("Access-Control-Allow-Headers: *");
@@ -120,17 +141,4 @@ class DefaultController {
         ];
         echo json_encode($response);
     }
-
-    public function unauthorizedResponse($message = "Unauthorized")
-    {
-        header("content-type: Application/json");
-        header("cache-control: no-cache");
-        header('HTTP/1.0 401');
-        $response = [
-            "statusCode" => 401,
-            "message" => $message
-        ];
-        echo json_encode($response);
-    }
-
 }

@@ -2,27 +2,92 @@
 
 namespace App\Entity;
 
+/**
+ * @OA\Schema(title="Animal")
+ */
 class Animal
 {
 
+        /**
+    *   @OA\Property(
+    *   type="integer",
+    *   nullable=false,
+    *   )
+    *   @var int 
+    */
     public $id;
 
+        /**
+    *   @OA\Property(
+    *   type="string",
+    *   nullable=false,
+    *   )
+    *   @var string 
+    */
     public $nom;
 
+    /**
+    *   @OA\Property(
+    *   type="string",
+    *   nullable=false,
+    *   )
+    *   @var string 
+    */
     public $type;
 
+    /**
+    *   @OA\Property(
+    *   type="string",
+    *   nullable=false,
+    *   )
+    *   @var string 
+    */
     public $race;
 
+    /**
+    *   @OA\Property(
+    *   type="float",
+    *   nullable=false,
+    *   )
+    *   @var float 
+    */
     public $poids;
 
+    /**
+    *   @OA\Property(
+    *   type="integer",
+    *   nullable=false,
+    *   )
+    *   @var int 
+    */
     public $age;
 
+    /**
+    *   @OA\Property(
+    *   type="string",
+    *   nullable=false,
+    *   )
+    *   @var string 
+    */
     public $description;
 
+    /**
+    *   @OA\Property(
+    *   type="string",
+    *   nullable=false,
+    *   )
+    *   @var string 
+    */
     public $photo;
 
+    /**
+    *   @OA\Property(
+    *   type="string",
+    *   nullable=true,
+    *   )
+    *   @var string 
+    */
     public $proprietaire;
-
 
     /**
      * Get the value of id
@@ -33,7 +98,7 @@ class Animal
     }
 
     /**
-     * Get the value of animal
+     * Get the value of name
      */
     public function getNom()
     {
@@ -41,7 +106,7 @@ class Animal
     }
 
     /**
-     * Set the value of animal
+     * Set the value of name
      */
     public function setNom($nom): self
     {

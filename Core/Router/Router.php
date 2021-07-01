@@ -3,12 +3,13 @@
 //Configuration des variables nécessaire au routing de l'application
 $path = $_SERVER["REQUEST_URI"];
 $pos=1;
-$uri = explode("/", $path);
+
+$uri = explode("/", explode("?",$path)[0]);
 if($uri[1] === "Ipssi-Api"){
     $pos = 2;
 }
 define("SERVER", $_SERVER["HTTP_HOST"]."/");
-$entity = ucfirst($uri[$pos]) ? ucfirst($uri[$pos]) : "default";
+$entity = (ucfirst($uri[$pos]) and substr($uri[$pos],0,1)!=="?")  ? ucfirst($uri[$pos]) : "Default";
 $controller = $entity==="Ipssi-Api"? "App\Controller\\DefaultController" :"App\Controller\\" . $entity . "Controller";
 $cont = new $controller();
 $htmlVerb = $_SERVER['REQUEST_METHOD'];
@@ -18,8 +19,7 @@ $htmlVerb = $_SERVER['REQUEST_METHOD'];
 //     $cont->optionResponse("ok");
 // }
 
-if ($path === "/" or $path ==="/Ipssi-Api/" or $htmlVerb === 'OPTIONS') {
-    $cont->optionResponse("ok");
+if ($path === "/" or substr($path,0,2)==="/?" or $htmlVerb === 'OPTIONS') {
     $cont->default();
 }
 else {

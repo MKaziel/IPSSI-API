@@ -1,10 +1,28 @@
 <?php
 namespace App\Entity;
 
+
+/**
+ * @OA\Schema(title="Catégorie")
+ */
 class Categorie {
 
+    /**
+    *   @OA\Property(
+    *   type="integer",
+    *   nullable=false,
+    *   )
+    *   @var int 
+    */
     public $id;
     
+    /**
+    *   @OA\Property(
+    *   type="string",
+    *   nullable=false,
+    *   )
+    *   @var string 
+    */
     public $nom;
 
     /**
@@ -16,7 +34,7 @@ class Categorie {
     }
 
     /**
-     * Get the value of article
+     * Get the value of name
      */
     public function getNom()
     {
@@ -24,7 +42,7 @@ class Categorie {
     }
 
     /**
-     * Set the value of categorie
+     * Set the value of name
      */
     public function setNom($nom): self
     {

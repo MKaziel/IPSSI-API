@@ -1,18 +1,63 @@
 <?php
 namespace App\Entity;
 
+/**
+ * @OA\Schema(title="Produit")
+ */
 class Produit {
 
+    /**
+    *   @OA\Property(
+    *   type="integer",
+    *   nullable=false,
+    *   )
+    *   @var int 
+    */
     public $id;
     
+    /**
+    *   @OA\Property(
+    *   type="string",
+    *   nullable=false,
+    *   )
+    *   @var string 
+    */
     public $nom;
 
+    /**
+    *   @OA\Property(
+    *   type="float",
+    *   nullable=false,
+    *   )
+    *   @var float 
+    */
     public $prix;
     
+    /**
+    *   @OA\Property(
+    *   type="string",
+    *   nullable=false,
+    *   )
+    *   @var string 
+    */
     public $type_animal;
 
+    /**
+    *   @OA\Property(
+    *   type="integer",
+    *   nullable=false,
+    *   )
+    *   @var int 
+    */
     public $quantite;
     
+    /**
+    *   @OA\Property(
+    *   type="string",
+    *   nullable=true,
+    *   )
+    *   @var string 
+    */
     public $description;
 
     /**
@@ -24,7 +69,7 @@ class Produit {
     }
 
     /**
-     * Get the value of produit
+     * Get the value of nom
      */
     public function getNom()
     {
@@ -32,7 +77,7 @@ class Produit {
     }
 
      /**
-     * Get the value of produit
+     * Get the value of prix
      */
      public function getPrix()
      {
@@ -40,14 +85,14 @@ class Produit {
      }
       
      /**
-     * Get the value of produit
+     * Get the type of animal
      */
     public function getType()
     {
         return $this->type_animal;
     }
      /**
-     * Get the value of produit
+     * Get the value of quantite
      */
      public function getQuantite()
      {
@@ -55,7 +100,7 @@ class Produit {
      }
      
      /**
-     * Get the value of produit
+     * Get the descrption
      */
      public function getDescription()
      {
@@ -63,7 +108,7 @@ class Produit {
      }
 
     /**
-     * Set the value of produit
+     * Set the value of name
      */
     public function setNom($nom): self
     {
@@ -72,7 +117,7 @@ class Produit {
         return $this;
     }
     /**
-     * Set the value of produit
+     * Set the value of prix
      */
      public function setPrix($prix): self
      {
@@ -81,7 +126,7 @@ class Produit {
          return $this;
      }
      /**
-     * Set the value of produit
+     * Set the type of animal
      */
     public function setType($type_animal): self
     {
@@ -90,7 +135,7 @@ class Produit {
         return $this;
     }
     /**
-     * Set the value of produit
+     * Set the value of quantite
      */
      public function setQuantite($quantite): self
      {
@@ -99,7 +144,7 @@ class Produit {
          return $this;
      }
      /**
-     * Set the value of produit
+     * Set the value of description
      */
     public function setDescription($description): self
     {

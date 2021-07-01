@@ -1,0 +1,2568 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Api animalerie",
+        "version": "0.0.1"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080",
+            "description": "sandbox-server"
+        }
+    ],
+    "paths": {
+        "/achat": {
+            "get": {
+                "tags": [
+                    "Achat"
+                ],
+                "summary": "List all achats",
+                "parameters": [
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List all achats",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "achat[]",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Achat"
+                                    }
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Accès à la page refusé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/achat/{id}": {
+            "get": {
+                "tags": [
+                    "Achat"
+                ],
+                "summary": "Retourne un achat",
+                "description": "Retourne un achat",
+                "operationId": "7d2adf260fec9d24681905a684befe2f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de l'achat à récupérer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retourne un achat",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Achat"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "apikey manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "apikey manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Accès à la page refusé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "apikey manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/achat/create": {
+            "post": {
+                "tags": [
+                    "Achat"
+                ],
+                "summary": "Create achat",
+                "description": "Créer un achat",
+                "operationId": "b8547408e1eb7a673de548b3fd391557",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Achat à enregistrer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_utilisateur": {
+                                        "type": "integer",
+                                        "example": 32
+                                    },
+                                    "id_produit": {
+                                        "type": "integer",
+                                        "example": 19
+                                    },
+                                    "montant": {
+                                        "type": "float",
+                                        "example": 49.99
+                                    },
+                                    "quantite": {
+                                        "type": "integer",
+                                        "example": 34
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Achat enregistré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/achat/update/{id}": {
+            "put": {
+                "tags": [
+                    "Achat"
+                ],
+                "summary": "Update achat",
+                "description": "Update achat in Db",
+                "operationId": "e11810d2719ff35ad316cda86929fe94",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de l'achat à mettre à jour",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "request": "Update achat",
+                    "description": "Achat à enregistrer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_utilisateur": {
+                                        "type": "integer",
+                                        "example": 32
+                                    },
+                                    "id_produit": {
+                                        "type": "integer",
+                                        "example": 19
+                                    },
+                                    "montant": {
+                                        "type": "float",
+                                        "example": 49.99
+                                    },
+                                    "quantite": {
+                                        "type": "integer",
+                                        "example": 34
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Achat enregistré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/achat/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Achat"
+                ],
+                "summary": "Delete achat",
+                "description": "Delete achat in Db",
+                "operationId": "5c17574b63caf48205b693ab2e1153ed",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de l'achat à supprimer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Suppression validée",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "Achat supprimé"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/animal": {
+            "get": {
+                "tags": [
+                    "Animal"
+                ],
+                "summary": "List all animals",
+                "parameters": [
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List all animals",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Animal[]",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Animal"
+                                    }
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Accès à la page refusé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/animal/{id}": {
+            "get": {
+                "tags": [
+                    "Animal"
+                ],
+                "summary": "Retourne un animal",
+                "description": "Retourne un animal",
+                "operationId": "e84f7fbb9a58ad9ffc06280fd53931a8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de l'animal à récupérer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retourne un animal",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Animal"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Accès à la page refusé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/animal/create": {
+            "post": {
+                "tags": [
+                    "Animal"
+                ],
+                "summary": "Create animal",
+                "description": "Créer un animal",
+                "operationId": "6656c4c0539c20b0329a777ba83e11db",
+                "parameters": [
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Animal à enregistrer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nom": {
+                                        "type": "string",
+                                        "example": "medeor"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "chien"
+                                    },
+                                    "race": {
+                                        "type": "string",
+                                        "example": "labrador"
+                                    },
+                                    "poids": {
+                                        "type": "float",
+                                        "example": 29.95
+                                    },
+                                    "age": {
+                                        "type": "int",
+                                        "example": 4
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Il est gentil"
+                                    },
+                                    "photo": {
+                                        "type": "string",
+                                        "example": "219779417329"
+                                    },
+                                    "proprietaire": {
+                                        "type": "int",
+                                        "example": null
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Animal enregistré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/animal/update/{id}": {
+            "put": {
+                "tags": [
+                    "Animal"
+                ],
+                "summary": "Update animal",
+                "description": "Update animal in Db",
+                "operationId": "4b531b7b2881874c27762e15858eccf0",
+                "parameters": [
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de l'animal à mettre à jour",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Animal à enregistrer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nom": {
+                                        "type": "string",
+                                        "example": "medeor"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "chien"
+                                    },
+                                    "race": {
+                                        "type": "chien",
+                                        "example": "labrador"
+                                    },
+                                    "poids": {
+                                        "type": "float",
+                                        "example": 29.95
+                                    },
+                                    "age": {
+                                        "type": "int",
+                                        "example": 4
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Il est gentil"
+                                    },
+                                    "photo": {
+                                        "type": "string",
+                                        "example": "219779417329"
+                                    },
+                                    "proprietaire": {
+                                        "type": "int",
+                                        "example": null
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Animal enregistré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/animal/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Animal"
+                ],
+                "summary": "Delete animal",
+                "description": "Delete animal in Db",
+                "operationId": "8c5241d414e2bf29f803d4702ee1dc93",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de l'animal à supprimer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Suppression validée",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "Animal supprimé"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/article": {
+            "get": {
+                "tags": [
+                    "Article"
+                ],
+                "summary": "List all articles",
+                "parameters": [
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List all articles",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Article[]",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Article"
+                                    }
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Accès à la page refusé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/article/{id}": {
+            "get": {
+                "tags": [
+                    "Article"
+                ],
+                "summary": "Retourne un article",
+                "description": "Retourne un article",
+                "operationId": "c44fbddadb7a2f8f3a650b9fb5cd8458",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de l'article à récupérer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retourne un article",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Achat"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Accès à la page refusé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/article/create": {
+            "post": {
+                "tags": [
+                    "Article"
+                ],
+                "summary": "Create article",
+                "description": "Créer un article",
+                "operationId": "0e9cd164679e26f207036fbda9d99958",
+                "parameters": [
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Article à enregistrer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "titre": {
+                                        "type": "string",
+                                        "example": "les nouvelles astuces pour promener son chien"
+                                    },
+                                    "contenue": {
+                                        "type": "string",
+                                        "example": "Lorem Ipsum"
+                                    },
+                                    "categorie_id": {
+                                        "type": "int",
+                                        "example": 3
+                                    },
+                                    "user_id": {
+                                        "type": "int",
+                                        "example": 4
+                                    },
+                                    "illustration": {
+                                        "type": "string",
+                                        "example": null
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Article enregistré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/article/update/{id}": {
+            "put": {
+                "tags": [
+                    "Article"
+                ],
+                "summary": "Update article",
+                "description": "Update article in Db",
+                "operationId": "0187f9343b9b05d44a5fc847c83625da",
+                "parameters": [
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de l'article à mettre à jour",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Article à enregistrer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "titre": {
+                                        "type": "string",
+                                        "example": "les nouvelles astuces pour promener son chien"
+                                    },
+                                    "contenue": {
+                                        "type": "string",
+                                        "example": "Lorem Ipsum"
+                                    },
+                                    "categorie_id": {
+                                        "type": "int",
+                                        "example": 3
+                                    },
+                                    "user_id": {
+                                        "type": "int",
+                                        "example": 4
+                                    },
+                                    "illustration": {
+                                        "type": "string",
+                                        "example": null
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Article enregistré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/article/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Article"
+                ],
+                "summary": "Delete article",
+                "description": "Delete article in Db",
+                "operationId": "15ccb9159de2462387769fdf8e272f07",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de l'article à supprimer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Suppression validée",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "Article supprimé"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/categorie": {
+            "get": {
+                "tags": [
+                    "Catégories"
+                ],
+                "summary": "List all categories",
+                "parameters": [
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List all categories",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Categorie[]",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Categorie"
+                                    }
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Accès à la page refusé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/categorie/{id}": {
+            "get": {
+                "tags": [
+                    "Catégories"
+                ],
+                "summary": "Retourne une categorie",
+                "description": "Retourne un categorie",
+                "operationId": "287834d7700e96fc8d9e955e1d6d9c48",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de la categorie à récupérer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retourne une categorie",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Achat"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Accès à la page refusé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/catégorie/create": {
+            "post": {
+                "tags": [
+                    "Catégories"
+                ],
+                "summary": "Create catégorie",
+                "description": "Créer une catégorie",
+                "operationId": "639118def56d1866478a89419837f4f1",
+                "parameters": [
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Catégorie à enregistrer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nom": {
+                                        "type": "string",
+                                        "example": "Alimentation"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Catégorie enregistré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/catégorie/update/{id}": {
+            "put": {
+                "tags": [
+                    "Catégories"
+                ],
+                "summary": "Update catégorie",
+                "description": "Update catégorie in Db",
+                "operationId": "f423913961e946597019832e01857fbd",
+                "parameters": [
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de l'catégorie à mettre à jour",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Catégorie à enregistrer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nom": {
+                                        "type": "string",
+                                        "example": "Alimentation"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Catégorie enregistré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/catégorie/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Catégories"
+                ],
+                "summary": "Delete catégorie",
+                "description": "Delete catégorie in Db",
+                "operationId": "59c300c745b6f70e817ad956a7cc53ec",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de la catégorie à supprimer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Suppression validée",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "Catégorie supprimé"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/don": {
+            "get": {
+                "tags": [
+                    "Don"
+                ],
+                "summary": "List all dons",
+                "parameters": [
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List all dons",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Don[]",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Don"
+                                    }
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Accès à la page refusé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/don/{id}": {
+            "get": {
+                "tags": [
+                    "Don"
+                ],
+                "summary": "Retourne un don",
+                "description": "Retourne un don",
+                "operationId": "2359083d99f65aeb11c69d08d6c3bc6a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id du don à récupérer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retourne un don",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Don"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Accès à la page refusé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/don/create": {
+            "post": {
+                "tags": [
+                    "Don"
+                ],
+                "summary": "Create don",
+                "description": "Créer un don",
+                "operationId": "aa748e7fd4ae5367a067fafba62113da",
+                "parameters": [
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Don à enregistrer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "montant": {
+                                        "type": "float",
+                                        "example": 39.99
+                                    },
+                                    "date": {
+                                        "type": "date",
+                                        "example": "31/01/2021"
+                                    },
+                                    "id_utilisateur": {
+                                        "type": "int",
+                                        "example": 3
+                                    },
+                                    "anonyme": {
+                                        "type": "bool",
+                                        "example": false
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Don enregistré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/don/update/{id}": {
+            "put": {
+                "tags": [
+                    "Don"
+                ],
+                "summary": "Update don",
+                "description": "Update don in Db",
+                "operationId": "81bca9e72f000f898227dd03e690c7af",
+                "parameters": [
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id du don à mettre à jour",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Don à enregistrer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "montant": {
+                                        "type": "float",
+                                        "example": 39.99
+                                    },
+                                    "date": {
+                                        "type": "date",
+                                        "example": "31/01/2021"
+                                    },
+                                    "id_utilisateur": {
+                                        "type": "int",
+                                        "example": 3
+                                    },
+                                    "anonyme": {
+                                        "type": "bool",
+                                        "example": false
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Don enregistré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/don/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Don"
+                ],
+                "summary": "Delete don",
+                "description": "Delete don in Db",
+                "operationId": "5825d81152295b4d657b47bfb4bac6d8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id du don à supprimer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Suppression validée",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "Don supprimé"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/produit": {
+            "get": {
+                "tags": [
+                    "Produit"
+                ],
+                "summary": "List all produits",
+                "parameters": [
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List all produits",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Produit[]",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Produit"
+                                    }
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Accès à la page refusé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/produit/{id}": {
+            "get": {
+                "tags": [
+                    "Produit"
+                ],
+                "summary": "Retourne un produit",
+                "description": "Retourne un produit",
+                "operationId": "abcbc550c1a09c8c10800255187236f8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id du produit à récupérer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retourne un produit",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Produit"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Accès à la page refusé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/produit/create": {
+            "post": {
+                "tags": [
+                    "Produit"
+                ],
+                "summary": "Create produit",
+                "description": "Créer un produit",
+                "operationId": "ddf41842d908a155aefc396a46453626",
+                "parameters": [
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Produit à enregistrer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nom": {
+                                        "type": "string",
+                                        "example": "laisse"
+                                    },
+                                    "prix": {
+                                        "type": "float",
+                                        "example": 19.99
+                                    },
+                                    "type_animal": {
+                                        "type": "string",
+                                        "example": "chien"
+                                    },
+                                    "id_categorie": {
+                                        "type": "int",
+                                        "example": 3
+                                    },
+                                    "quantite": {
+                                        "type": "integer",
+                                        "example": 20
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": null
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Produit enregistré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/produit/update/{id}": {
+            "put": {
+                "tags": [
+                    "Produit"
+                ],
+                "summary": "Update produit",
+                "description": "Update produit in Db",
+                "operationId": "9acdfb2ad70c64bedf5e401eee5ed373",
+                "parameters": [
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id du produit à mettre à jour",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Produit à enregistrer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nom": {
+                                        "type": "string",
+                                        "example": "laisse"
+                                    },
+                                    "prix": {
+                                        "type": "float",
+                                        "example": 19.99
+                                    },
+                                    "type_animal": {
+                                        "type": "string",
+                                        "example": "chien"
+                                    },
+                                    "id_categorie": {
+                                        "type": "int",
+                                        "example": 3
+                                    },
+                                    "quantite": {
+                                        "type": "integer",
+                                        "example": 20
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": null
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Produit enregistré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/produit/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Produit"
+                ],
+                "summary": "Delete produit",
+                "description": "Delete produit in Db",
+                "operationId": "d1cc4c0e1aff403b3314f9a7f3133fac",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id du produit à supprimer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Suppression validée",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "Produit supprimé"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/utilisateur": {
+            "get": {
+                "tags": [
+                    "Utilisateur"
+                ],
+                "summary": "List all utilisateurs",
+                "parameters": [
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List all utilisateurs",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Utilisateur[]",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Utilisateur"
+                                    }
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Accès à la page refusé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/utilisateur/{id}": {
+            "get": {
+                "tags": [
+                    "Utilisateur"
+                ],
+                "summary": "Retourne un utilisateur",
+                "description": "Retourne un utilisateur",
+                "operationId": "e2c52478379263f4e37750c9022fe0b3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id du utilisateur à récupérer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retourne un utilisateur",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Utilisateur"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Accès à la page refusé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/utilisateur/create": {
+            "post": {
+                "tags": [
+                    "Utilisateur"
+                ],
+                "summary": "Create utilisateur",
+                "description": "Créer un utilisateur",
+                "operationId": "06e35da558df41c04ac32186a955382a",
+                "parameters": [
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Utilisateur à enregistrer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "identifiant": {
+                                        "type": "string",
+                                        "example": "Bob77"
+                                    },
+                                    "motdepasse": {
+                                        "type": "string",
+                                        "example": "password"
+                                    },
+                                    "role": {
+                                        "type": "string",
+                                        "example": "user"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Utilisateur enregistré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/utilisateur/update/{id}": {
+            "put": {
+                "tags": [
+                    "Utilisateur"
+                ],
+                "summary": "Update utilisateur",
+                "description": "Update utilisateur in Db",
+                "operationId": "572aba7de24cdc589ff380b6efd4c7db",
+                "parameters": [
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de l'utilisateur à mettre à jour",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Utilisateur à enregistrer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "identifiant": {
+                                        "type": "string",
+                                        "example": "Bob77"
+                                    },
+                                    "motdepasse": {
+                                        "type": "string",
+                                        "example": "password"
+                                    },
+                                    "role": {
+                                        "type": "string",
+                                        "example": "user"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Utilisateur enregistré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/utilisateur/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Utilisateur"
+                ],
+                "summary": "Delete utilisateur",
+                "description": "Delete utilisateur in Db",
+                "operationId": "edc16a851ed9f21f52bb1e4ebbb01dc1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id du utilisateur à supprimer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Suppression validée",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "Utilisateur supprimé"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/utilisateur/connexion": {
+            "post": {
+                "tags": [
+                    "Utilisateur"
+                ],
+                "summary": "Connect utilisateur",
+                "description": "Connexion pour un utilisateur",
+                "operationId": "a0617259fd2ee59d8df0c4cf81d379f0",
+                "parameters": [
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Utilisateur à connecté",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "identifiant": {
+                                        "type": "string",
+                                        "example": "Bob77"
+                                    },
+                                    "motdepasse": {
+                                        "type": "string",
+                                        "example": "password"
+                                    },
+                                    "role": {
+                                        "type": "string",
+                                        "example": "user"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Utilisateur connecté",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Achat": {
+                "title": "Achat",
+                "properties": {
+                    "id": {
+                        "nullable": false,
+                        "type": "integer"
+                    },
+                    "id_utilisateur": {
+                        "nullable": false,
+                        "type": "integer"
+                    },
+                    "id_produit": {
+                        "nullable": false,
+                        "type": "integer"
+                    },
+                    "montatnt": {
+                        "nullable": false,
+                        "type": "float"
+                    },
+                    "quantite": {
+                        "nullable": false,
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "Animal": {
+                "title": "Animal",
+                "properties": {
+                    "id": {
+                        "nullable": false,
+                        "type": "integer"
+                    },
+                    "nom": {
+                        "nullable": false,
+                        "type": "string"
+                    },
+                    "type": {
+                        "nullable": false,
+                        "type": "string"
+                    },
+                    "race": {
+                        "nullable": false,
+                        "type": "string"
+                    },
+                    "poids": {
+                        "nullable": false,
+                        "type": "float"
+                    },
+                    "age": {
+                        "nullable": false,
+                        "type": "integer"
+                    },
+                    "description": {
+                        "nullable": false,
+                        "type": "string"
+                    },
+                    "photo": {
+                        "nullable": false,
+                        "type": "string"
+                    },
+                    "proprietaire": {
+                        "nullable": true,
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Article": {
+                "title": "Article",
+                "properties": {
+                    "id": {
+                        "nullable": false,
+                        "type": "integer"
+                    },
+                    "titre": {
+                        "nullable": false,
+                        "type": "string"
+                    },
+                    "contenue": {
+                        "nullable": false,
+                        "type": "string"
+                    },
+                    "categorie_id": {
+                        "nullable": false,
+                        "type": "integer"
+                    },
+                    "user_id": {
+                        "nullable": false,
+                        "type": "integer"
+                    },
+                    "illustration": {
+                        "nullable": true,
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "Categorie": {
+                "title": "Catégorie",
+                "properties": {
+                    "id": {
+                        "nullable": false,
+                        "type": "integer"
+                    },
+                    "nom": {
+                        "nullable": false,
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Don": {
+                "title": "Don",
+                "properties": {
+                    "id": {
+                        "nullable": false,
+                        "type": "integer"
+                    },
+                    "montant": {
+                        "nullable": false,
+                        "type": "float"
+                    },
+                    "data": {
+                        "nullable": false,
+                        "type": "date"
+                    },
+                    "id_utilisateur": {
+                        "nullable": false,
+                        "type": "integer"
+                    },
+                    "anonyme": {
+                        "nullable": false,
+                        "type": "bool"
+                    }
+                },
+                "type": "object"
+            },
+            "Produit": {
+                "title": "Produit",
+                "properties": {
+                    "id": {
+                        "nullable": false,
+                        "type": "integer"
+                    },
+                    "nom": {
+                        "nullable": false,
+                        "type": "string"
+                    },
+                    "prix": {
+                        "nullable": false,
+                        "type": "float"
+                    },
+                    "type_animal": {
+                        "nullable": false,
+                        "type": "string"
+                    },
+                    "quantite": {
+                        "nullable": false,
+                        "type": "integer"
+                    },
+                    "description": {
+                        "nullable": true,
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Utilisateur": {
+                "title": "Utilisateur",
+                "properties": {
+                    "id": {
+                        "nullable": false,
+                        "type": "integer"
+                    },
+                    "identifiant": {
+                        "nullable": false,
+                        "type": "string"
+                    },
+                    "motdepasse": {
+                        "nullable": false,
+                        "type": "string"
+                    },
+                    "email": {
+                        "nullable": false,
+                        "type": "string"
+                    },
+                    "pseudo": {
+                        "nullable": false,
+                        "type": "string"
+                    },
+                    "role": {
+                        "nullable": false,
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

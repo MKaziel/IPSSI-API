@@ -2,17 +2,58 @@
 
 namespace App\Entity;
 
+use OpenApi\Annotations as OA;
+
+/**
+ * @OA\Schema(title="Achat")
+ */
 class Achat
 {
 
+
+    /**
+     * @OA\Property(
+     *   type="integer",
+     *   nullable=false,
+     *   )
+     *   @var int 
+     */
     public $id;
 
+    /**
+     * @OA\Property(
+     *          type="integer",
+     *          nullable=false
+     * )
+     * @var int
+     */
     public $id_utilisateur;
 
+    /**
+     * @OA\Property(
+     *          type="integer",
+     *          nullable=false
+     * )
+     * @var int
+     */
     public $id_produit;
 
+    /**
+     * @OA\Property(
+     *          type="float",
+     *          nullable=false
+     * )
+     * @var float
+     */
     public $montatnt;
 
+    /**
+     * @OA\Property(
+     *          type="integer",
+     *          nullable=false
+     * )
+     * @var int
+     */
     public $quantite;
 
 
@@ -50,15 +91,15 @@ class Achat
         return $this->id_produit;
     }
 
-        /**
+    /**
      * Set the value of id_produit
      */
-     public function setIdProduit($id_produit): self
-     {
-         $this->id_produit = $id_produit;
- 
-         return $this;
-     }
+    public function setIdProduit($id_produit): self
+    {
+        $this->id_produit = $id_produit;
+
+        return $this;
+    }
 
     /**
      * Get the value of montant
@@ -86,13 +127,13 @@ class Achat
         return $this->quantite;
     }
 
-        /**
+    /**
      * Set the value of quantite
      */
-     public function setQuantite($quantite): self
-     {
-         $this->quantite = $quantite;
- 
-         return $this;
-     }
+    public function setQuantite($quantite): self
+    {
+        $this->quantite = $quantite;
+
+        return $this;
+    }
 }
