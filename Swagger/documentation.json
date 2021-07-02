@@ -1348,7 +1348,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "description": "{\r\n     *                  'id': 'test             \r\n     *              }",
+                                    "description": "infoswagger",
                                     "type": "string"
                                 }
                             },
@@ -2529,7 +2529,7 @@
                     },
                     "illustration": {
                         "nullable": true,
-                        "type": "integer"
+                        "type": "string"
                     }
                 },
                 "type": "object"

@@ -40,6 +40,7 @@ else {
                             $method = $uri[$pos+1];
                             $cont->$method();
                         }
+                        var_dump($role);
                     }
                     else {
                         $cont->UnauthorizedJsonResponse("Authorisation manquante");

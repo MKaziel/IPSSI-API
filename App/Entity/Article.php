@@ -53,10 +53,10 @@ class Article {
 
     /**
     *   @OA\Property(
-    *   type="integer",
+    *   type="string",
     *   nullable=true,
     *   )
-    *   @var int 
+    *   @var string 
     */
     public $illustration;
 
