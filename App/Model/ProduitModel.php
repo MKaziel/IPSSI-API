@@ -1,10 +1,12 @@
 <?php
+
 namespace App\Model;
 
 use App\Entity\Produit;
 use Core\Database;
 
-class ProduitModel {
+class ProduitModel
+{
 
     private $className = "App\Entity\Produit";
 
@@ -13,7 +15,8 @@ class ProduitModel {
         $this->db = new Database;
     }
 
-    public function model(){
+    public function model()
+    {
         $model = array(
             "nom" => "nom",
             "prix" => "prix",
@@ -29,7 +32,7 @@ class ProduitModel {
      *
      * @return Produit[]
      */
-    public function findAll() :array
+    public function findAll(): array
     {
         $statement = "SELECT * FROM produit";
         return $this->db->query($statement, $this->className);
@@ -41,7 +44,7 @@ class ProduitModel {
      * @param int $id
      * @return Produit
      */
-    public function find(int $id) :Produit
+    public function find(int $id): Produit
     {
         $statement = "SELECT * FROM produit WHERE id = $id";
         return $this->db->query($statement, $this->className, true);
@@ -56,14 +59,17 @@ class ProduitModel {
 
     public function update(array $data)
     {
+        if (!isset($data['description'])) {
+            $data['description'] = null;
+        }
         $statement = "UPDATE produit SET
-                       nom = :nom,
-                       prix = :prix,
-                       type_animal = :type_animal,
-                       quantite = :quantite,
-                       description = :description
-                        ";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-        
+                        nom = :nom,
+                        prix = :prix,
+                        type_animal = :type_animal,
+                        quantite = :quantite,
+                        description = :description
+                    ";
+
         return $this->db->prepare($statement, $data);
     }
 

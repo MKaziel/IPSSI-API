@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\DefaultController;
 use App\Model\UtilisateurModel;
+use Firebase\JWT\JWT;
 
 class UtilisateurController extends DefaultController
 {
@@ -364,26 +365,23 @@ class UtilisateurController extends DefaultController
      * @return void
      */
     public function connexion(array $data) {
-        $allUtilisateur = $this->model->findAll();
-        $bool = false;
-
-        while(next($allUtilisateur) && !$bool){
-            $current = current($allUtilisateur);
-            if($current['identifiant'] == $data['identifiant'] && $current['motdepasse'] == $data['motdepasse']){
-                $bool = true;
-            }
-        }
-
-        if($bool){
-            $this->jsonResponse(array(
-                "message" => "Utilistateur trouvé",
-                "connecter" => true
-            ));
+        $utilisateur = $this->model->getUserByIdentifiant($data["Identifiant"]);
+        
+        if($data["Motdepasse"] === $utilisateur->getMotdepasse()){
+            $date = new \DateTime();
+            $date->add(new \DateInterval('P1D'));
+            $ts = $date->getTimestamp();
+            $key = "mk";
+            $payload = [
+                "id" => $utilisateur->getId(),
+                "pseudo" => $utilisateur->getPseudo(),
+                "roles" => $utilisateur->getRole(),
+                "exp" => $ts
+            ];
+            $jwt = JWT::encode($payload, $key);
+            $this->jsonResponse($jwt);
         } else {
-            $this->jsonResponse(array(
-                "message" => "Utilistateur non trouvé",
-                "connecter" => false
-            ));
+            $this->BadRequestJsonResponse("Utilisateur non trouvé dans la base.");
         }
     }
 }

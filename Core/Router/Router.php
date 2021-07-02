@@ -14,6 +14,9 @@ $controller = $entity==="Ipssi-Api"? "App\Controller\\DefaultController" :"App\C
 $cont = new $controller();
 $htmlVerb = $_SERVER['REQUEST_METHOD'];
 
+//Route exception
+$postRouteException = array("connexion");
+
 //Détection du verbe et application de la route en conséquence
 // if($rMethod === "OPTIONS") {
 //     $cont->optionResponse("ok");
@@ -24,7 +27,6 @@ if ($path === "/" or substr($path,0,2)==="/?" or $htmlVerb === 'OPTIONS') {
 }
 else {
     if(isset($uri[$pos+1])) {
-        echo($uri[$pos+1]);
         if (method_exists($cont, $uri[$pos+1])) {
             switch ($htmlVerb) {
                 case 'GET':
@@ -40,12 +42,12 @@ else {
                         }
                     }
                     else {
-                        $cont->unauthorizedResponse("Authorisation manquante");
+                        $cont->UnauthorizedJsonResponse("Authorisation manquante");
                     }
                     break;
 
                 case 'POST':
-                    if (in_array("admin", $role)) {
+                    if (in_array("admin", $role) or in_array($uri[$pos+1], $postRouteException)) {
                         if(isset($uri[$pos+2])){
                             if(isset($_POST) && !empty($_POST)) {
                                 $method = $uri[$pos+1];
@@ -66,7 +68,7 @@ else {
                         }
                     }
                     else {
-                        $cont->unauthorizedResponse("Authorisation manquante");
+                        $cont->UnauthorizedJsonResponse("Authorisation manquante");
                     }
                     break;
 
@@ -88,7 +90,7 @@ else {
                         }
                     }
                     else {
-                        $cont->unauthorizedResponse("Authorisation manquante");
+                        $cont->UnauthorizedJsonResponse("Authorisation manquante");
                     }
                     break;
 
@@ -103,7 +105,7 @@ else {
                         }
                     }
                     else {
-                        $cont->unauthorizedResponse("Authorisation manquante");
+                        $cont->UnauthorizedJsonResponse("Authorisation manquante");
                     }
                     break;
                 

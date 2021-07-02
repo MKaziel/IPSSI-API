@@ -47,6 +47,9 @@ class UtilisateurModel {
 
     public function create(array $data)
     {
+        if (!isset($data['role'])) {
+            $data['role'] = "user";
+        }
         $statement = "INSERT INTO utilisateur (identifiant,motdepasse,role) 
             VALUES (:identifiant,:motdepasse,:role)";
         return $this->db->prepare($statement, $data);
@@ -68,5 +71,11 @@ class UtilisateurModel {
         $statement = "DELETE FROM utilisateur WHERE id = $id";
 
         return $this->db->prepare($statement, array());
+    }
+
+    public function getUserByIdentifiant($identifiant)
+    {
+        $statement = "SELECT * FROM utilisateur WHERE identifiant = '$identifiant'";
+        return $this->db->query($statement, $this->className, true);
     }
 }

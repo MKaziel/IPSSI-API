@@ -81,7 +81,7 @@ class Utilisateur
     /**
      * Get the mot de passe
      */
-    public function getPassword()
+    public function getMotdepasse()
     {
         return $this->motdepasse;
     }
@@ -108,7 +108,7 @@ class Utilisateur
     /**
      * Set the value of mot de passe
      */
-    public function setPassword($motdepasse): self
+    public function setMotdepasse($motdepasse): self
     {
         $this->motdepasse = $motdepasse;
 

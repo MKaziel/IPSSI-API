@@ -10,10 +10,62 @@ class DefaultController
         return $this->optionResponse("Bienvenue sur l'API de l'animalerie de l'IPSSI");
     }
 
+
+/**
+     * @OA\Get(
+     * path="/infoswagger",
+     * summary="Show info swagger",
+     *       tags={"Swagger"},
+     *  @OA\Parameter(
+     *          name="access key",
+     *          in="query",
+     *          description="access key permettant de valider l'application",
+     *          required=true,
+     *          @OA\Schema(type="string")
+     *      ),
+     *      @OA\Response(
+     *          response = "200",
+     *          description="show info swagger",
+     *          @OA\JsonContent(
+     *              type="string",
+     *              description="infoswagger",
+     *          ),
+     *          @OA\XmlContent(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response="401",
+     *          description="apiKey missing",
+     *          @OA\JsonContent(
+     *              type="string",
+     *              description="access key manquante"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response="500",
+     *          description="internal server error",
+     *          @OA\JsonContent(
+     *              type="string",
+     *              description="access key manquante"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response="403",
+     *          description="Accès à la page refusé",
+     *          @OA\JsonContent(
+     *          type="string",
+     *          description="access key manquante"
+     *          )
+     *      )
+     * )
+     * 
+     * @return void
+     */
     public function infoSwagger($dir,$exclude = [],$pattern="*.php")
     {
         header("content-type: Application/json");
-        header("cache-control: public, max-age=1000");
+        header("cache-control: public, max-age=36000");
         header("Access-Control-Allow-Origin: *");
         header('HTTP/1.0 200');
 
@@ -31,7 +83,7 @@ class DefaultController
     public function jsonResponse($data, $message = "Récupération ok")
     {
         header("content-type: Application/json");
-        header("cache-control: public, max-age=1000");
+        header("cache-control: public, max-age=36000");
         header("Access-Control-Allow-Origin: *");
         header('HTTP/1.0 200');
         $response = [

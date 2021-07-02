@@ -7,7 +7,7 @@
     "servers": [
         {
             "url": "http://localhost:8080",
-            "description": "sandbox-server"
+            "description": "IPSSI Animalerie serveur"
         }
     ],
     "paths": {
@@ -1318,6 +1318,77 @@
                                     "type": "string"
                                 },
                                 "example": "Catégorie supprimé"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/infoswagger": {
+            "get": {
+                "tags": [
+                    "Swagger"
+                ],
+                "summary": "Show info swagger",
+                "operationId": "96cc67ac61bece98c716408f81f5e8a3",
+                "parameters": [
+                    {
+                        "name": "access key",
+                        "in": "query",
+                        "description": "access key permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "show info swagger",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "{\r\n     *                  'id': 'test             \r\n     *              }",
+                                    "type": "string"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Accès à la page refusé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "access key manquante",
+                                    "type": "string"
+                                }
                             }
                         }
                     }
